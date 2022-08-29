@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="die1.gif" />
+    <None Remove="die2.gif" />
+    <None Remove="die3.gif" />
+    <None Remove="die4.gif" />
+    <None Remove="die5.gif" />
+    <None Remove="die6.gif" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <COMReference Include="{d37e2a3e-8545-3a39-9f4f-31827c9124ab}">
+      <WrapperTool>tlbimp</WrapperTool>
+      <VersionMinor>4</VersionMinor>
+      <VersionMajor>2</VersionMajor>
+      <Guid>d37e2a3e-8545-3a39-9f4f-31827c9124ab</Guid>
+    </COMReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="die1.gif" />
+    <Resource Include="die2.gif" />
+    <Resource Include="die3.gif" />
+    <Resource Include="die4.gif" />
+    <Resource Include="die5.gif" />
+    <Resource Include="die6.gif" />
+  </ItemGroup>
+
+</Project>

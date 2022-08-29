@@ -1,0 +1,46 @@
+﻿<Window x:Class="DiceRoller.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DiceRoller"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="351" Width="400">
+    <Grid>
+        <StackPanel>
+        <GroupBox Width="200">
+            <GroupBox.Header>
+                <TextBlock>Game Info</TextBlock>
+            </GroupBox.Header>
+            <StackPanel>
+                <TextBlock Name="lblPlayed">Number of Times Played : 0</TextBlock>
+                <TextBlock Name="lblWon">Number of Times Won : 0</TextBlock>
+                <TextBlock Name="lblLost">Number of Times Lost : 0</TextBlock>
+            </StackPanel>
+        </GroupBox>
+        
+
+        <StackPanel Width="200">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Margin="5">Enter your Guess :</TextBlock>
+                <TextBox Width="25" MaxLength="1" Margin="5" Name="txtInput" TextChanged="txtInput_TextChanged"/>
+            </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Image Name="imgOutput" Source="/die6.gif"/>
+                    <StackPanel>
+                        <Button Name="btnRoll" Click="btnRoll_Click" IsEnabled="False">Roll</Button>
+                        <Button Name="btnRest">Reset</Button>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        
+        
+        <GroupBox Width="300">
+            <TextBlock Name ="txtStats">
+                
+            </TextBlock>
+        </GroupBox>
+    </StackPanel>
+    </Grid>
+
+</Window>

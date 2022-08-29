@@ -1,0 +1,15 @@
+C:\Users\Quentin Higley\source\repos\ConsolePractice\ConsolePractice\bin\Debug\net6.0\ConsolePractice.exe
+C:\Users\Quentin Higley\source\repos\ConsolePractice\ConsolePractice\bin\Debug\net6.0\ConsolePractice.deps.json
+C:\Users\Quentin Higley\source\repos\ConsolePractice\ConsolePractice\bin\Debug\net6.0\ConsolePractice.runtimeconfig.json
+C:\Users\Quentin Higley\source\repos\ConsolePractice\ConsolePractice\bin\Debug\net6.0\ConsolePractice.dll
+C:\Users\Quentin Higley\source\repos\ConsolePractice\ConsolePractice\bin\Debug\net6.0\ConsolePractice.pdb
+C:\Users\Quentin Higley\source\repos\ConsolePractice\ConsolePractice\obj\Debug\net6.0\ConsolePractice.csproj.AssemblyReference.cache
+C:\Users\Quentin Higley\source\repos\ConsolePractice\ConsolePractice\obj\Debug\net6.0\ConsolePractice.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Quentin Higley\source\repos\ConsolePractice\ConsolePractice\obj\Debug\net6.0\ConsolePractice.AssemblyInfoInputs.cache
+C:\Users\Quentin Higley\source\repos\ConsolePractice\ConsolePractice\obj\Debug\net6.0\ConsolePractice.AssemblyInfo.cs
+C:\Users\Quentin Higley\source\repos\ConsolePractice\ConsolePractice\obj\Debug\net6.0\ConsolePractice.csproj.CoreCompileInputs.cache
+C:\Users\Quentin Higley\source\repos\ConsolePractice\ConsolePractice\obj\Debug\net6.0\ConsolePractice.dll
+C:\Users\Quentin Higley\source\repos\ConsolePractice\ConsolePractice\obj\Debug\net6.0\refint\ConsolePractice.dll
+C:\Users\Quentin Higley\source\repos\ConsolePractice\ConsolePractice\obj\Debug\net6.0\ConsolePractice.pdb
+C:\Users\Quentin Higley\source\repos\ConsolePractice\ConsolePractice\obj\Debug\net6.0\ConsolePractice.genruntimeconfig.cache
+C:\Users\Quentin Higley\source\repos\ConsolePractice\ConsolePractice\obj\Debug\net6.0\ref\ConsolePractice.dll

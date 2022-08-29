@@ -1,0 +1,17 @@
+C:\Users\Quentin Higley\source\repos\MessageBox\MessageBox\bin\Debug\net6.0-windows\MessageBox.exe
+C:\Users\Quentin Higley\source\repos\MessageBox\MessageBox\bin\Debug\net6.0-windows\MessageBox.deps.json
+C:\Users\Quentin Higley\source\repos\MessageBox\MessageBox\bin\Debug\net6.0-windows\MessageBox.runtimeconfig.json
+C:\Users\Quentin Higley\source\repos\MessageBox\MessageBox\bin\Debug\net6.0-windows\MessageBox.dll
+C:\Users\Quentin Higley\source\repos\MessageBox\MessageBox\bin\Debug\net6.0-windows\MessageBox.pdb
+C:\Users\Quentin Higley\source\repos\MessageBox\MessageBox\obj\Debug\net6.0-windows\MessageBox.csproj.AssemblyReference.cache
+C:\Users\Quentin Higley\source\repos\MessageBox\MessageBox\obj\Debug\net6.0-windows\MessageBox.Form1.resources
+C:\Users\Quentin Higley\source\repos\MessageBox\MessageBox\obj\Debug\net6.0-windows\MessageBox.csproj.GenerateResource.cache
+C:\Users\Quentin Higley\source\repos\MessageBox\MessageBox\obj\Debug\net6.0-windows\MessageBox.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Quentin Higley\source\repos\MessageBox\MessageBox\obj\Debug\net6.0-windows\MessageBox.AssemblyInfoInputs.cache
+C:\Users\Quentin Higley\source\repos\MessageBox\MessageBox\obj\Debug\net6.0-windows\MessageBox.AssemblyInfo.cs
+C:\Users\Quentin Higley\source\repos\MessageBox\MessageBox\obj\Debug\net6.0-windows\MessageBox.csproj.CoreCompileInputs.cache
+C:\Users\Quentin Higley\source\repos\MessageBox\MessageBox\obj\Debug\net6.0-windows\MessageBox.dll
+C:\Users\Quentin Higley\source\repos\MessageBox\MessageBox\obj\Debug\net6.0-windows\refint\MessageBox.dll
+C:\Users\Quentin Higley\source\repos\MessageBox\MessageBox\obj\Debug\net6.0-windows\MessageBox.pdb
+C:\Users\Quentin Higley\source\repos\MessageBox\MessageBox\obj\Debug\net6.0-windows\MessageBox.genruntimeconfig.cache
+C:\Users\Quentin Higley\source\repos\MessageBox\MessageBox\obj\Debug\net6.0-windows\ref\MessageBox.dll
