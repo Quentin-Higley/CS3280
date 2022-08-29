@@ -25,6 +25,7 @@ namespace DiceRoller
     /// </summary>
     public partial class MainWindow : Window
     {
+        //TODO should I declare object here?
         private DiceRollerGame game = new DiceRollerGame();
         /// <summary>
         /// 
@@ -41,6 +42,8 @@ namespace DiceRoller
             string stats6 = String.Format("\n{0,5} {1,17} {2, 21} {3, 17}", "6", "0", "00.00", "0");
             string stats = header + stats1 + stats2 + stats3 + stats4 + stats5 + stats6;
             txtStats.Text = stats;
+
+            //TODO Should I declare object here?
         }
         /// <summary>
         /// 
@@ -49,6 +52,8 @@ namespace DiceRoller
         /// <param name="e"></param>
         private void btnRoll_Click(object sender, RoutedEventArgs e)
         {
+            //declare variables
+            //TODO should be in object but need to figure out
             const string strLost = "Number of Times Lost : ";
             const string strWon = "Number of Times Won : ";
             const string strGame = "Number of Times Played : ";
@@ -56,16 +61,19 @@ namespace DiceRoller
             int won = int.Parse(lblWon.Text.Split(" ")[^1]);
             int games = int.Parse(lblPlayed.Text.Split(" ")[^1]);
 
+            //Game code
             Random rand = new Random();
             int roll = rand.Next(1,7);
             rollDie(roll);
 
             int guess = int.Parse(txtInput.Text);
 
+            //check for win or lose and increment respective
             games++;
             lost += roll == guess ? 0 : 1;
             won += roll == guess ? 1 : 0;
 
+            //update form
             lblLost.Text = $"{strLost}{lost}";
             lblWon.Text = $"{strWon}{won}";
             lblPlayed.Text = $"{strGame}{games}";
@@ -96,12 +104,15 @@ namespace DiceRoller
         }
         private void rollDie(int roll)
         {
-            
+            // dice roller code
             Random rand = new Random();
 
+            //random number of img changes
             int rolls = rand.Next(1, 10);
             for (int i = 0; i < rolls; i++)
             {
+                //change image
+                //TODO refresh image
                 int imgroll = rand.Next(1, 7);
                 BitmapImage tempbit = new BitmapImage();
                 tempbit.BeginInit();
@@ -113,7 +124,7 @@ namespace DiceRoller
                 imgroll = rand.Next(20, 50);
                 Thread.Sleep(imgroll);
             }
-
+            //set final image
             BitmapImage bitmap = new BitmapImage();
             bitmap.BeginInit();
             bitmap.CacheOption = BitmapCacheOption.OnLoad;
