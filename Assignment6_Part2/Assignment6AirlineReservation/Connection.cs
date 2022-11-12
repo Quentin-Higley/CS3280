@@ -37,9 +37,13 @@ namespace Assignment6AirlineReservation
         {
             try
             {
+                //regex language
                 replace = new Regex(@"{(?<exp>[^}]+)}");
+                //database connection
                 conn = new clsDataAccess();
+                //sql command dictionary
                 sql = new Dictionary<string, string>();
+                //sql commands
                 sql.Add("getFlights", "SELECT Flight_ID, Flight_Number, Aircraft_Type FROM FLIGHT");
 
                 sql.Add("getPassengers", "SELECT PASSENGER.Passenger_ID, First_Name, Last_Name, Seat_Number " +
@@ -92,12 +96,16 @@ namespace Assignment6AirlineReservation
                         execute = replace.Replace(execute, args[i], 1);
                     }
                 }
+                //if its a query
                 if (statement == "getFlights" || statement == "getPassengers")
                     ds = conn.ExecuteSQLStatement(execute, ref iRet);
+                //if it only returns one value
                 else if (statement == "getPassengerId")
                      scalar = conn.ExecuteScalarSQL(execute);
+                //if it is a CRUD statement
                 else
                     conn.ExecuteNonQuery(execute);
+                //return dataset
                 return ds;
             }
             catch(Exception ex)
@@ -116,10 +124,13 @@ namespace Assignment6AirlineReservation
         {
             try
             {
+                //create list of flights
                 List<Flight> flights = new List<Flight>();
+                //statement to be used
                 string statement = "getFlights";
+                //dataset to be returned
                 DataSet ds = executeSql(statement, null);
-
+                //add the flights to the list
                 foreach (DataRow row in ds.Tables[0].Rows)
                 {
                     Flight f = new Flight(row.ItemArray[0].ToString(), row.ItemArray[1].ToString(), row.ItemArray[2].ToString());
@@ -145,17 +156,21 @@ namespace Assignment6AirlineReservation
         {
             try
             {
+                //passengers list
                 List<Passenger> passengers = new List<Passenger>();
+                //sql statement
                 string statement = "getPassengers";
+                //sql args
                 string[] args = { flightId };
+                //executed statement
                 DataSet ds = executeSql(statement, args);
-
+                //add passengers to list
                 foreach (DataRow row in ds.Tables[0].Rows)
                 {
                     Passenger p = new Passenger(row[0].ToString(), row[1].ToString(), row[2].ToString(), row[3].ToString());
                     passengers.Add(p);
                 }
-
+                //return passenger list
                 return passengers;
             }
             catch(Exception ex)
@@ -176,6 +191,7 @@ namespace Assignment6AirlineReservation
         {
             try
             {
+                // return the output
                 return executeSql(statement, args);
             }
             catch (Exception ex)

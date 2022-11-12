@@ -58,9 +58,12 @@ namespace Assignment6AirlineReservation
             {
                 InitializeComponent();
                 Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
+                //sql command object
                 conn = new Connection();
+                //changes the combobox itemsource to be flights so that they can be used
                 flights = conn.getFlights();
                 cbChooseFlight.ItemsSource = flights;
+                // this is the click mode
                 mode = 0;
             }
             catch (Exception ex)
@@ -96,6 +99,7 @@ namespace Assignment6AirlineReservation
         {
             try
             {
+                //enable conrols
                 passed = name;
             }
             catch (Exception ex)
@@ -114,11 +118,13 @@ namespace Assignment6AirlineReservation
         {
             try
             {
+                //anables the controls
                 cbChooseFlight.IsEnabled = true;
                 cbChoosePassenger.IsEnabled = true;
                 cmdAddPassenger.IsEnabled = true;
                 cmdChangeSeat.IsEnabled = true;
                 cmdDeletePassenger.IsEnabled = true;
+                //changes the click mode to be the default click mode
                 mode = 0;
             }
             catch (Exception ex)
@@ -136,6 +142,7 @@ namespace Assignment6AirlineReservation
         {
             try
             {
+                //disables window controls
                 cbChooseFlight.IsEnabled = false;
                 cbChoosePassenger.IsEnabled = false;
                 cmdAddPassenger.IsEnabled = false;
@@ -159,12 +166,20 @@ namespace Assignment6AirlineReservation
         {
             try
             {
+                // get the currently selected flight
                 Flight selection = (Flight)cbChooseFlight.SelectedItem;  //This is wrong, if a list of flights was in the combo box, then could get the selected flight in an object
+                //set the cb to no selected item
                 cbChoosePassenger.SelectedIndex = -1;
+                //adds the passengers from the flight to the flights person list
                 selection.addPassengers(conn.getPassenger(selection.FlightId));
+
+                //change item source
                 cbChoosePassenger.ItemsSource = selection.PassengerList;
+                //Enable passenger cb
                 cbChoosePassenger.IsEnabled = true;
+                //enable buttons
                 gPassengerCommands.IsEnabled = true;
+                //seat canvases
                 Canvas canvas;
                 
                 //Should be using a flight object to get the flight ID here
@@ -182,6 +197,7 @@ namespace Assignment6AirlineReservation
                     canvas = this.cA380_Seats;
                 }
 
+                //color the labels correctly
                 fillSeats(canvas, selection);
             }
             catch (Exception ex)
@@ -200,25 +216,39 @@ namespace Assignment6AirlineReservation
         {
             try
             {
+                //label that was clicked
                 Label label = (Label)sender;
 
+                // if the seat is taken or selected return
                 if (label.Background == Brushes.Red || label.Background == Brushes.Green)
                     return;
+                //get selected flight
 
                 Flight flight = (Flight)cbChooseFlight.SelectedItem;
+                //get the canvas that is to the selected flight
                 Canvas canvas = this.FindName($"c{flight.AircraftType.Split()[1]}_Seats") as Canvas;
 
+                //get the seat number
                 string seat = (string)label.Content;
+                // the arguments for the sql command First Name Last Name
                 string[] pArgs = { passed[0], passed[1] };
+                //call the function to add a passenger
                 conn.execSql("addPassenger", pArgs);
+                //get the added passenger ID
                 conn.execSql("getPassengerId", pArgs);
+                //store the passengerId
                 string pId = conn.Scalar;
+                // add the link
                 string[] lArgs = { flight.FlightId, pId, seat };
 
+                //call the function to add the seat
                 conn.execSql("insertLink", lArgs);
+                //Add the passenger to the list
                 flight.addPassengers(conn.getPassenger(flight.FlightId));
 
+                //set the UI seat number of the clicked seat
                 lblPassengersSeatNumber.Content = $"{seat}";
+                //get the index of the passenger
                 bool found = false;
                 int idx = 0;
                 foreach (Passenger p in flight.PassengerList)
@@ -230,9 +260,13 @@ namespace Assignment6AirlineReservation
                     }
                     idx++;
                 }
+                //set the cb selected item to the the newelly added passenger index
                 cbChoosePassenger.SelectedIndex = idx;
+                //reset the seat colors
                 fillSeats(canvas, flight);
+                //change the selected seat
                 selectedSeat(canvas, int.Parse(seat));
+                //enable UI
                 enable();
             }
             catch (Exception ex)
@@ -252,26 +286,38 @@ namespace Assignment6AirlineReservation
         {
             try
             {
+                //the clicked seat
                 Label label = (Label)sender;
+                // if the background is red or green skip
                 if (label.Background == Brushes.Red || label.Background == Brushes.Green)
                     return;
 
+                //get the selected flight
                 Flight flight = (Flight)cbChooseFlight.SelectedItem;
+                //get the selected passenger
                 Passenger passenger = (Passenger)cbChoosePassenger.SelectedItem;
+                //get the correct seat canvas
                 Canvas canvas = this.FindName($"c{flight.AircraftType.Split()[1]}_Seats") as Canvas;
 
+                //get the seat number
                 string seat = (string)label.Content;
+                //arguments for sql seat number flightID and passengerID
                 string[] args = { seat, flight.FlightId, passenger.PassengerId };
+                // call the function that calls to execute the sql command
                 conn.execSql("updateSeat", args);
+                //refresh passenger list
                 flight.addPassengers(conn.getPassenger(flight.FlightId));
 
-
+                //update the ui
                 lblPassengersSeatNumber.Content = $"{seat}";
 
 
+                //update seat map
                 fillSeats(canvas, flight);
+                //select the new seat
                 selectedSeat(canvas, int.Parse(seat));
 
+                //enabel ui
                 enable();
             }
             catch (Exception ex)
@@ -292,12 +338,18 @@ namespace Assignment6AirlineReservation
             try
             {
                 bool found = false;
+                //label that was clicked
                 Label label = (Label)sender;
+                //current selected flight
                 Flight flight = (Flight)cbChooseFlight.SelectedItem;
+                // flight canvas
                 Canvas canvas = this.FindName($"c{flight.AircraftType.Split()[1]}_Seats") as Canvas;
+                //seat number
                 string seat = (string)label.Content;
 
+                //get passenger index
                 int idx = 0;
+                //get the passenger index
                 foreach (Passenger p in flight.PassengerList)
                 {
                     if (p.SeatNumber == seat)
@@ -307,11 +359,15 @@ namespace Assignment6AirlineReservation
                     }
                     idx++;
                 }
+                //if it is not found then it is not a valid selection
                 if (!found)
                     return;
+                //set passenger to the correct index
                 cbChoosePassenger.SelectedIndex = idx;
+                //update the seat
                 lblPassengersSeatNumber.Content = $"{seat}";
 
+                // set the selected seat to green
                 selectedSeat(canvas, int.Parse(seat));
 
             }
@@ -334,8 +390,11 @@ namespace Assignment6AirlineReservation
             {
                 modes = new Dictionary<int, Action>()
                 {
+                    // default seat click
                     {0,()=>modeRegular(sender) },
+                    // if updating seat
                     {1,()=>modeUpdate(sender) },
+                    // if adding seats
                     {2,()=>modeAdd(sender) }
                 };
                 modes[mode]();
@@ -358,13 +417,20 @@ namespace Assignment6AirlineReservation
         {
             try
             {
+                // if their is no selected passenger do nothing
                 if (cbChoosePassenger.SelectedIndex < 0)
                     return;
+                // get current selected passenger
                 Passenger selection = (Passenger)cbChoosePassenger.SelectedItem;
+                //get the current flight
                 Flight flight = (Flight)cbChooseFlight.SelectedItem;
+                //get correct canvas
                 Canvas canvas = this.FindName($"c{flight.AircraftType.Split()[1]}_Seats") as Canvas;
+                //get the seat number from the passenger
                 int seat = int.Parse(selection.SeatNumber);
+                //change the ui
                 lblPassengersSeatNumber.Content = seat;
+                //update selected seat
                 selectedSeat(canvas, seat);
             }
             catch (Exception ex)
@@ -384,16 +450,22 @@ namespace Assignment6AirlineReservation
         {
             try
             {
+                //get the amount of labels on the canvas
                 int labelCount = VisualTreeHelper.GetChildrenCount(canvas);
                 for (int i = 0; i < labelCount; i++)
                 {
+                    //get the ith label
                     Label label = VisualTreeHelper.GetChild(canvas, i) as Label;
+                    //get the content of it
                     int content = int.Parse((string)label.Content);
+                    //if it is currently green change to red
                     if (label.Background == Brushes.Green)
                         label.Background = Brushes.Red;
+                    //if it is not red change to blue
                     else if (label.Background != Brushes.Red)
                         label.Background = Brushes.Blue;
 
+                    //otherwise if it is the correct seat change to green
                     if (content == Selected)
                     {
                         label.Background = Brushes.Green;
@@ -416,8 +488,11 @@ namespace Assignment6AirlineReservation
         {
             try
             {
+                // disable ui
                 disable();
+                //change to add passenger mode
                 mode = 2;
+                //change the window
                 wndAddPass = new wndAddPassenger();
                 wndAddPass.ShowDialog();
             }
@@ -438,16 +513,21 @@ namespace Assignment6AirlineReservation
         {
             try
             {
+                //get the seats to red and blue if taken or not
                 int labelCount = VisualTreeHelper.GetChildrenCount(canvas);
                 for (int i = 0; i < labelCount; i++)
                 {
+                    // ith label
                     Label label = VisualTreeHelper.GetChild(canvas, i) as Label;
+                    //get the seat number of the label
                     int content = int.Parse((string)label.Content);
+                    // change it to blue
                     label.Background = Brushes.Blue;
 
 
                     foreach (Passenger p in selected.PassengerList)
                     {
+                        //if the passenger is on the flight the seat is red
                         int seat = int.Parse(p.SeatNumber);
                         if (content == seat)
                             label.Background = Brushes.Red;
@@ -488,18 +568,26 @@ namespace Assignment6AirlineReservation
         {
             try
             {
+                // if there is no selected passenger skip
                 if (cbChoosePassenger.SelectedIndex < 0)
                     return;
 
+                //get selected passenger
                 Passenger p = (Passenger)cbChoosePassenger.SelectedItem;
+                //get selected flight
                 Flight f = (Flight)cbChooseFlight.SelectedItem;
+                //get passenger id for sql arguments
                 string[] dPassenger = { p.PassengerId };
+                //get flightId and passengerId for sql arguments
                 string[] dLink = { f.FlightId, p.PassengerId };
+                //call function to execute the sql commands
                 conn.execSql("deleteLink", dLink);
                 conn.execSql("deletePassenger", dPassenger);
+                //refresh passenger list
                 string[] flightId = { f.FlightId };
                 conn.execSql("getPassengers", flightId);
                 f.addPassengers(conn.getPassenger(f.FlightId));
+                //update the ui
                 Canvas canvas = this.FindName($"c{f.AircraftType.Split()[1]}_Seats") as Canvas;
                 fillSeats(canvas, f);
                 cbChoosePassenger.SelectedIndex = -1;
@@ -521,10 +609,12 @@ namespace Assignment6AirlineReservation
         {
             try
             {
+                //if no seleced skip
                 if (cbChoosePassenger.SelectedIndex < 0)
                     return;
-
+                //disable ui
                 disable();
+                //change ui mode
                 mode = 1;
             }
             catch (Exception ex)
